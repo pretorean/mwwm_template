@@ -8,13 +8,11 @@ import 'package:mwwm_template/runner/runner.dart';
 //Main entry point of app
 void main() {
   Environment.init(
-    buildType: BuildType.debug,
+    buildType: BuildType.release,
     config: Config(
-      url: Url.testUrl,
-      proxyUrl: Url.devProxyUrl,
-      debugOptions: DebugOptions(
-        debugShowCheckedModeBanner: true,
-      ),
+      url: Url.prodUrl,
+      proxyUrl: Url.prodProxyUrl,
+      debugOptions: DebugOptions(),
     ),
   );
 

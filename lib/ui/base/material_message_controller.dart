@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
 import 'package:mwwm/mwwm.dart';
 import 'package:mwwm_template/ui/base/owners/snackbar_owner.dart';
 import 'package:mwwm_template/ui/res/colors.dart';
@@ -6,9 +7,12 @@ import 'package:mwwm_template/util/enum.dart';
 import 'package:surf_logger/surf_logger.dart';
 
 ///Стандартная реализация [MessageController]
+@injectable
 class MaterialMessageController extends MessageController {
-  MaterialMessageController(this._scaffoldState, {this.snackOwner})
-      : _context = null;
+  MaterialMessageController(
+    @factoryParam this._scaffoldState, {
+    this.snackOwner,
+  }) : _context = null;
 
   MaterialMessageController.from(this._context, {this.snackOwner})
       : _scaffoldState = null;

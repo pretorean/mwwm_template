@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:mwwm/mwwm.dart';
 import 'package:mwwm_template/interactor/common/exceptions.dart';
 import 'package:mwwm_template/interactor/session/session_changed_interactor.dart';
@@ -7,6 +8,7 @@ import 'package:mwwm_template/ui/res/strings/common_strings.dart';
 import 'package:surf_network/surf_network.dart';
 
 /// Стандартная реализация ErrorHandler
+@injectable
 class StandardErrorHandler extends NetworkErrorHandler {
   StandardErrorHandler(
     this._messageController,

@@ -4,12 +4,11 @@ import 'package:mwwm_template/config/config.dart';
 import 'package:mwwm_template/config/env/env.dart';
 import 'package:mwwm_template/domain/debug_options.dart';
 import 'package:mwwm_template/ui/app/app_wm.dart';
-import 'package:mwwm_template/ui/app/di/app.dart';
+import 'package:mwwm_template/ui/base/default_wm_builder.dart';
 import 'package:mwwm_template/ui/res/styles.dart';
 import 'package:mwwm_template/ui/screen/splash_screen/splash_route.dart';
 import 'package:mwwm_template/ui/screen/welcome_screen/welcome_route.dart';
 import 'package:mwwm_template/util/error_widget.dart' as error_widget;
-import 'package:surf_injector/surf_injector.dart';
 import 'package:surf_mwwm/surf_mwwm.dart';
 
 // todo оставить здесь только необходимые маршруты
@@ -17,7 +16,6 @@ class AppRouter {
   static const String root = '/';
   static const String splashScreen = '/splash';
 
-  // ignore: avoid_annotating_with_dynamic
   static final Map<String, Route Function(Object)> routes = {
     AppRouter.root: (data) => WelcomeScreenRoute(),
     AppRouter.splashScreen: (data) => SplashScreenRoute(),
@@ -25,16 +23,15 @@ class AppRouter {
 }
 
 /// Виджет приложения
-class App extends MwwmWidget<AppComponent> {
-  App({
-    Key key,
-    WidgetModelBuilder widgetModelBuilder = createAppWidgetModel,
-  }) : super(
+class App extends CoreMwwmWidget {
+  App({Key key})
+      : super(
           key: key,
-          dependenciesBuilder: (context) => AppComponent(context),
-          widgetStateBuilder: () => _AppState(),
-          widgetModelBuilder: widgetModelBuilder,
+          widgetModelBuilder: defaultWmBuilder<AppWidgetModel, AppParam>(),
         );
+
+  @override
+  _AppState createState() => _AppState();
 }
 
 class _AppState extends WidgetState<AppWidgetModel> {
@@ -53,7 +50,7 @@ class _AppState extends WidgetState<AppWidgetModel> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: Injector.of<AppComponent>(context).component.navigator,
+      navigatorKey: wm.navigatorKey,
       builder: (context, widget) {
         ErrorWidget.builder = (flutterErrorDetails) {
           return error_widget.ErrorWidget(

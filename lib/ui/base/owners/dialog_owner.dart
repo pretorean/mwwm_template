@@ -35,7 +35,6 @@ class FlexibleDialogBuilder<T extends DialogData> extends DialogBuilder<T> {
     BuildContext context, {
     T data,
     ScrollController scrollController,
-    // ignore: overridden_fields
   }) builder;
 
   @override

@@ -1,31 +1,22 @@
-import 'package:flutter/widgets.dart' hide Action;
+import 'package:flutter/material.dart' hide Action;
+import 'package:injectable/injectable.dart';
 import 'package:mwwm_template/domain/counter.dart';
 import 'package:mwwm_template/interactor/counter/counter_interactor.dart';
-import 'package:mwwm_template/ui/screen/welcome_screen/di/welcome_screen_component.dart';
-import 'package:surf_injector/surf_injector.dart';
+import 'package:mwwm_template/ui/base/injectable_wm.dart';
 import 'package:surf_mwwm/surf_mwwm.dart';
 
-/// Билдер для [WelcomeScreenWidgetModel].
-WelcomeScreenWidgetModel createWelcomeWidgetModel(BuildContext context) {
-  final component = Injector.of<WelcomeScreenComponent>(context).component;
-
-  return WelcomeScreenWidgetModel(
-    component.wmDependencies,
-    component.navigator,
-    component.counterInteractor,
-  );
-}
+class WelcomeScreenParam {}
 
 /// [WidgetModel] для экрана <Welcome>
-class WelcomeScreenWidgetModel extends WidgetModel {
+@injectable
+class WelcomeScreenWidgetModel extends InjectableWM<WelcomeScreenParam> {
   WelcomeScreenWidgetModel(
-    WidgetModelDependencies dependencies,
-    this.navigator,
+    @factoryParam BuildContext context,
+    @factoryParam WelcomeScreenParam value,
     this._counterInteractor,
-  ) : super(dependencies);
+  ) : super(context, value);
 
   final CounterInteractor _counterInteractor;
-  final NavigatorState navigator;
 
   StreamedState<int> counterState = StreamedState();
 

@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:mwwm_template/ui/screen/splash_screen/di/splash_screen_component.dart';
+import 'package:mwwm_template/ui/base/default_wm_builder.dart';
 import 'package:mwwm_template/ui/screen/splash_screen/splash_wm.dart';
-import 'package:surf_injector/surf_injector.dart';
 import 'package:surf_mwwm/surf_mwwm.dart';
 
 /// Splash screen
-class SplashScreen extends MwwmWidget<SplashScreenComponent> {
-  SplashScreen({
-    Key key,
-    WidgetModelBuilder widgetModelBuilder = createSplashScreenWidgetModel,
-  }) : super(
+class SplashScreen extends CoreMwwmWidget {
+  SplashScreen({Key key})
+      : super(
           key: key,
-          dependenciesBuilder: (context) => SplashScreenComponent(context),
-          widgetStateBuilder: () => _SplashScreenState(),
-          widgetModelBuilder: widgetModelBuilder,
+          widgetModelBuilder:
+              defaultWmBuilder<SplashScreenWidgetModel, SplashScreenParam>(),
         );
+
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends WidgetState<SplashScreenWidgetModel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: Injector.of<SplashScreenComponent>(context).component.scaffoldKey,
+      key: wm.scaffoldKey,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

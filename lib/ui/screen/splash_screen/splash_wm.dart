@@ -1,29 +1,19 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart' as widgets;
+import 'package:flutter/material.dart' hide Action;
+import 'package:injectable/injectable.dart';
 import 'package:mwwm_template/ui/app/app.dart';
-import 'package:mwwm_template/ui/screen/splash_screen/di/splash_screen_component.dart';
+import 'package:mwwm_template/ui/base/injectable_wm.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:surf_injector/surf_injector.dart';
 import 'package:surf_mwwm/surf_mwwm.dart';
 
-/// Билдер для WelcomeScreenWidgetModel.
-SplashScreenWidgetModel createSplashScreenWidgetModel(BuildContext context) {
-  final component = Injector.of<SplashScreenComponent>(context).component;
-
-  return SplashScreenWidgetModel(
-    component.wmDependencies,
-    component.navigator,
-  );
-}
+class SplashScreenParam {}
 
 /// [WidgetModel] для экрана <SplashScreen>
-class SplashScreenWidgetModel extends WidgetModel {
+@injectable
+class SplashScreenWidgetModel extends InjectableWM<SplashScreenParam> {
   SplashScreenWidgetModel(
-    WidgetModelDependencies dependencies,
-    this._navigator,
-  ) : super(dependencies);
-
-  final widgets.NavigatorState _navigator;
+    @factoryParam BuildContext context,
+    @factoryParam SplashScreenParam value,
+  ) : super(context, value);
 
   @override
   void onLoad() {
@@ -41,7 +31,7 @@ class SplashScreenWidgetModel extends WidgetModel {
   }
 
   void _openScreen(String routeName) {
-    _navigator.pushReplacementNamed(routeName);
+    Navigator.of(context).pushReplacementNamed(routeName);
   }
 
   Stream<bool> initApp() {

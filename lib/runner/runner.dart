@@ -1,14 +1,14 @@
 import 'dart:async';
 
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mwwm_template/di/di_container.dart';
 import 'package:mwwm_template/ui/app/app.dart';
 
 Future<void> run() async {
   // Нужно вызывать чтобы не падало проставление ориентации
   WidgetsFlutterBinding.ensureInitialized();
-  // закрепляем ориентацию todo изменить на необходимое или убрать
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  configureDependencies();
 
   _initCrashlytics();
   _initLogger();

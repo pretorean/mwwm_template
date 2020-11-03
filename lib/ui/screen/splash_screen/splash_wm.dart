@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart' hide Action;
 import 'package:injectable/injectable.dart';
 import 'package:mwwm_template/ui/app/app.dart';
 import 'package:mwwm_template/ui/base/injectable_wm.dart';
@@ -11,9 +10,8 @@ class SplashScreenParam {}
 @injectable
 class SplashScreenWidgetModel extends InjectableWM<SplashScreenParam> {
   SplashScreenWidgetModel(
-    @factoryParam BuildContext context,
     @factoryParam SplashScreenParam value,
-  ) : super(context, value);
+  ) : super(value);
 
   @override
   void onLoad() {
@@ -31,7 +29,7 @@ class SplashScreenWidgetModel extends InjectableWM<SplashScreenParam> {
   }
 
   void _openScreen(String routeName) {
-    Navigator.of(context).pushReplacementNamed(routeName);
+    navigatorKey.currentState.pushReplacementNamed(routeName);
   }
 
   Stream<bool> initApp() {

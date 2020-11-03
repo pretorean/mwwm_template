@@ -7,7 +7,6 @@ import 'package:mwwm_template/util/enum.dart';
 import 'package:surf_logger/surf_logger.dart';
 
 ///Стандартная реализация [MessageController]
-@injectable
 class MaterialMessageController extends MessageController {
   MaterialMessageController(
     @factoryParam this._scaffoldState, {

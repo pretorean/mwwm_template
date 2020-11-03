@@ -8,25 +8,23 @@ import 'package:relation/relation.dart';
 class InjectableWM<T> extends WidgetModel {
   ErrorHandler _errorHandler;
 
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  final BuildContext context;
   final T value;
 
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
   InjectableWM(
-    this.context,
     this.value,
   ) : super(WidgetModelDependencies(
             errorHandler: StandardErrorHandler(null, null, null)));
 
   @protected
-  WidgetModelDependencies dependenciesBuilder(BuildContext context) {
+  WidgetModelDependencies dependenciesBuilder() {
     return defaultScaffoldDependencyBuilder(scaffoldKey);
   }
 
   @override
   void onLoad() {
-    _errorHandler = dependenciesBuilder(context).errorHandler;
+    _errorHandler = dependenciesBuilder().errorHandler;
     super.onLoad();
   }
 

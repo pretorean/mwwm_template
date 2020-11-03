@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart' hide Action;
 import 'package:injectable/injectable.dart';
 import 'package:mwwm_template/domain/counter.dart';
 import 'package:mwwm_template/interactor/counter/counter_interactor.dart';
@@ -11,10 +10,9 @@ class WelcomeScreenParam {}
 @injectable
 class WelcomeScreenWidgetModel extends InjectableWM<WelcomeScreenParam> {
   WelcomeScreenWidgetModel(
-    @factoryParam BuildContext context,
     @factoryParam WelcomeScreenParam value,
     this._counterInteractor,
-  ) : super(context, value);
+  ) : super(value);
 
   final CounterInteractor _counterInteractor;
 

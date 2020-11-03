@@ -16,7 +16,6 @@ class DialogType extends Enum<String> {
 }
 
 ///Стандартная реализация [DialogController]
-@injectable
 class DefaultDialogController implements DialogController {
   DefaultDialogController(
     @factoryParam this._scaffoldKey, {

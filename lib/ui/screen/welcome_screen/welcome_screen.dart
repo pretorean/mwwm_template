@@ -23,10 +23,6 @@ class WelcomeScreen extends CoreMwwmWidget {
 class _WelcomeScreenState extends WidgetState<WelcomeScreenWidgetModel> {
   @override
   Widget build(BuildContext context) {
-    return _buildScreen(context);
-  }
-
-  Widget _buildScreen(BuildContext context) {
     return Scaffold(
       key: wm.scaffoldKey,
       floatingActionButton: OpacityFab(
